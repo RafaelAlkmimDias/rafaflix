@@ -29,6 +29,8 @@ function App() {
         ignoreFirstVideo
         category={dadosIniciais.categorias[2]}
       />
+
+      <Footer />
     </div>
   );
 }
