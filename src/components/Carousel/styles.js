@@ -1,16 +1,16 @@
 import styled from 'styled-components';
 
 export const Title = styled.h3`
-  font-style: normal;
-  font-weight: normal;
-  font-size: 35px;
-  line-height: 1;
-  margin-bottom: 16px;
+  border-radius: 4px;
   display: inline-block;
+  font-size: 35px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
   padding: 20px;
+  margin-bottom: 16px;
   background: red;
   line-height: 1;
-  border-radius: 4px;
 
   @media (max-width: 800px) {
     font-size: 18px;
@@ -48,7 +48,7 @@ export const VideoCardList = styled.ul`
 `;
 
 export const VideoCardGroupContainer = styled.section`
-  color: white;
+  color: var(--white);
   min-height: 197px;
   margin-left: 5%;
   margin-bottom: 16px;
