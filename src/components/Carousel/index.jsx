@@ -1,29 +1,37 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { VideoCardGroupContainer, Title, ExtraLink } from './styles';
 
 import VideoCard from './components/VideoCard';
 import Slider, { SliderItem } from './components/Slider';
 
-function Carousel({
-  ignoreFirstVideo,
-  category,
-}) {
-  const categoryTitle = category.titulo;
-  const categoryColor = category.cor;
-  const categoryExtraLink = category.link_extra;
-  const videos = category.videos;
+function Carousel({ ignoreFirstVideo, category }) {
+  Carousel.propTypes = {
+    ignoreFirstVideo: PropTypes.bool,
+    category: PropTypes.string.isRequired,
+  };
+  Carousel.defaultProps = {
+    ignoreFirstVideo: false,
+  };
+  const {
+    titulo,
+    cor,
+    linkExtra,
+    videos,
+  } = category;
+
   return (
     <VideoCardGroupContainer>
-      {categoryTitle && (
+      {titulo && (
         <>
-          <Title style={{ backgroundColor: categoryColor || 'red' }}>
-            {categoryTitle}
+          <Title style={{ backgroundColor: cor || 'red' }}>
+            {titulo}
           </Title>
-          {categoryExtraLink && 
-            <ExtraLink href={categoryExtraLink.url} target="_blank">
-              {categoryExtraLink.text}  
+          {linkExtra && (
+            <ExtraLink href={linkExtra.url} target="_blank">
+              {linkExtra.text}
             </ExtraLink>
-          }
+          )}
         </>
       )}
       <Slider>
@@ -37,7 +45,7 @@ function Carousel({
               <VideoCard
                 videoTitle={video.titulo}
                 videoURL={video.url}
-                categoryColor={categoryColor}
+                categoryColor={cor}
               />
             </SliderItem>
           );

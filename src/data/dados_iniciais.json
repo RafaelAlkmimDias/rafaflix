@@ -4,7 +4,7 @@
       "titulo": "Front End",
       "link": "https://www.alura.com.br/formacao-front-end",
       "cor": "#6BD1FF",
-      "link_extra": {
+      "linkExtra": {
         "text": "Formação de Front End na Alura",
         "url": "https://www.alura.com.br/cursos-online-front-end"
       },
@@ -46,7 +46,7 @@
     {
       "titulo": "Back End",
       "cor": "#00C86F",
-      "link_extra": {
+      "linkExtra": {
         "text": "Cursos de Back End na Alura",
         "url": "https://www.alura.com.br/cursos-online-programacao"
       },
@@ -76,7 +76,7 @@
     {
       "titulo": "Data Science e Inteligência Artificial",
       "cor": "#9cd33b",
-      "link_extra": {
+      "linkExtra": {
         "text": "Cursos de Data Science na Alura",
         "url": "https://www.alura.com.br/formacao-data-science"
       },
@@ -124,7 +124,7 @@
     {
       "titulo": "Games",
       "cor": "red",
-      "link_extra": {
+      "linkExtra": {
         "text": "Formação de Jogos na Alura",
         "url": "https://www.alura.com.br/formacao-jogos-unity"
       },
@@ -154,7 +154,7 @@
     {
       "titulo": "Aprendendo a aprender tecnologia",
       "cor": "#6b5be2",
-      "link_extra": {
+      "linkExtra": {
         "text": "Curso sobre aprendizado na Alura",
         "url": "https://alura.com.br/curso-online-aprender-a-aprender-tecnicas-para-seu-autodesenvolvimento"
       },

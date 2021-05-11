@@ -1,3 +1,4 @@
+import React from 'react';
 import SlickSlider from 'react-slick';
 import styled from 'styled-components';
 
@@ -36,19 +37,21 @@ export const SliderItem = styled.li`
     }
 `;
 
+// eslint-disable-next-line react/prop-types
 const Slider = ({ children }) => (
-    <Containner>
-        <SlickSlider {...{
-            dots: false,
-            infinite: false,
-            speed: 300,
-            centerMode: false,
-            variableWidth: true,
-            adaptiveHeight: true,
-        }}>
-            {children}
-        </SlickSlider>
-    </Containner>
+  <Containner>
+    <SlickSlider {...{
+      dots: false,
+      infinite: false,
+      speed: 300,
+      centerMode: false,
+      variableWidth: true,
+      adaptiveHeight: true,
+    }}
+    >
+      {children}
+    </SlickSlider>
+  </Containner>
 );
 
 export default Slider;

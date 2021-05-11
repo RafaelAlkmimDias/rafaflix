@@ -100,8 +100,6 @@ ContentAreaContainer.Description = styled.p`
   }
 `;
 
-
-
 export const WatchButton = styled.button`
   background-color: var(--white);
   border: 0;
