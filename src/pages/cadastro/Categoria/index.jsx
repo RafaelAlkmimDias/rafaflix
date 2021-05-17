@@ -39,7 +39,9 @@ function Categoria() {
   }
 
   useEffect(() => {
-    const URL_CATEGORIAS = 'https://rafaflixalura.herokuapp.com/categorias';
+    const URL_CATEGORIAS = window.location.hostname.includes('localhost')
+      ? 'http://localhost:8080/categorias'
+      : 'https://rafaflixalura.herokuapp.com/categorias';
 
     fetch(URL_CATEGORIAS).then(
       async (respostaDoServidor) => {
