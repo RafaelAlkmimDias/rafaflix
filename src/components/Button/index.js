@@ -9,7 +9,7 @@ const Button = styled.button`
   padding: 16px 24px;
   text-decoration: none;
   transition: opacity .3s;
-
+  background-color: var(--black);
 
   box-sizing: border-box;
   cursor: pointer;

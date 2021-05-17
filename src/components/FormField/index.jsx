@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormBlock, FormLabel } from './styles';
+import { FormFieldWrapper, Label, Input } from './styles';
 
 function FormField({
   label, value, name, handlerChange, required, type,
@@ -11,42 +11,36 @@ function FormField({
     value: PropTypes.string.isRequired,
     handlerChange: PropTypes.func,
     required: PropTypes.bool,
-    type: PropTypes.string.isRequired,
+    type: PropTypes.string,
   };
   FormField.defaultProps = {
     required: false,
     handlerChange: () => {},
+    type: 'input',
   };
 
-  if (type === 'textarea') {
-    return (
-      <FormBlock>
-        <FormLabel>
-          { label }
-        </FormLabel>
-        <textarea
+  const isTextArea = type === 'textarea';
+  const tag = isTextArea ? 'textarea' : 'input';
+  const hasValue = Boolean(value.length);
+
+  return (
+    <FormFieldWrapper>
+      <Label>
+        <Input
+          as={tag}
+          type={type}
           name={name}
           onChange={handlerChange}
           required={required}
           value={value}
+          hasValue={hasValue}
         />
-      </FormBlock>
-    );
-  }
-
-  return (
-    <FormBlock>
-      <FormLabel>
-        { label }
-      </FormLabel>
-      <input
-        type={type}
-        value={value}
-        name={name}
-        onChange={handlerChange}
-        required={required}
-      />
-    </FormBlock>
+        <Label.Text>
+          { label }
+          :
+        </Label.Text>
+      </Label>
+    </FormFieldWrapper>
   );
 }
 
