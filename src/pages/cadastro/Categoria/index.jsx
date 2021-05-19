@@ -5,23 +5,19 @@ import { Link } from 'react-router-dom';
 import PageDefault from '../../../components/PageDefault';
 import FormField from '../../../components/FormField';
 import Button from '../../../components/Button';
+import useForm from '../../../hooks/useForm';
+import categoriasRepository from '../../../repositories/categorias';
 
 function Categoria() {
   const valoresIniciais = {
-    nome: '',
+    titulo: '',
     descricao: '',
     cor: '#000000',
   };
 
-  const [categorias, setCategorias] = useState([]);
-  const [values, setValues] = useState(valoresIniciais);
+  const { values, handlerChange, clearValues } = useForm(valoresIniciais);
 
-  function setValue(chave, valor) {
-    setValues({
-      ...values,
-      [chave]: valor,
-    });
-  }
+  const [categorias, setCategorias] = useState([]);
 
   function handlerSubmit(e) {
     e.preventDefault();
@@ -29,28 +25,18 @@ function Categoria() {
       ...categorias,
       values,
     ]);
-    setValues(valoresIniciais);
-  }
-
-  function handlerChange(e) {
-    const chave = e.target.getAttribute('name');
-    const valor = e.target.value;
-    setValue(chave, valor);
+    clearValues();
   }
 
   useEffect(() => {
-    const URL_CATEGORIAS = window.location.hostname.includes('localhost')
-      ? 'http://localhost:8080/categorias'
-      : 'https://rafaflixalura.herokuapp.com/categorias';
-
-    fetch(URL_CATEGORIAS).then(
-      async (respostaDoServidor) => {
-        const resposta = await respostaDoServidor.json();
-        setCategorias([
-          ...resposta,
-        ]);
-      },
-    );
+    categoriasRepository.getAll().then((data) => {
+      setCategorias([
+        ...data,
+      ]);
+    }).catch((err) => {
+      // eslint-disable-next-line no-console
+      console.log(err);
+    });
   }, []);
 
   return (
@@ -60,8 +46,8 @@ function Categoria() {
         <FormField
           label="Nome da Categoria"
           type="text"
-          value={values.nome}
-          name="nome"
+          value={values.titulo}
+          name="titulo"
           handlerChange={handlerChange}
           required
         />
@@ -100,7 +86,7 @@ function Categoria() {
             style={{ color: Categoria.cor }}
             tip={Categoria.descricao}
           >
-            {categoria.nome}
+            {categoria.titulo}
           </li>
         ))}
       </ul>

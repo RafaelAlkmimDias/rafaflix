@@ -1,35 +1,56 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import PageDefault from '../../components/PageDefault';
-import dadosIniciais from '../../data/dados_iniciais.json';
 import BannerMain from '../../components/BannerMain';
 import Carousel from '../../components/Carousel';
+import categoriasRepository from '../../repositories/categorias';
 
 function Home() {
+  const [dados, setDados] = useState([]);
+
+  useEffect(() => {
+    categoriasRepository.getAllWithVideos().then((data) => {
+      setDados([
+        ...data,
+      ]);
+    }).then(() => {
+    }).catch((err) => {
+      // eslint-disable-next-line no-console
+      console.log(err);
+    });
+  }, []);
+
   return (
     <PageDefault>
 
-      <BannerMain
-        videoTitle={dadosIniciais.categorias[0].videos[0].titulo}
-        url={dadosIniciais.categorias[0].videos[0].url}
-        videoDescription="O que é Front-end?"
-      />
+      {dados.length === 0 && (<div>loading...</div>)}
 
-      <Carousel
-        ignoreFirstVideo
-        category={dadosIniciais.categorias[0]}
-      />
+      { dados.length !== 0 && dados.map((categoria, indice) => {
+        if (indice === 0) {
+          return (
+            <>
+              <BannerMain
+                videoTitle={categoria.videos[0].titulo}
+                url={categoria.videos[0].url}
+                videoDescription="O que é Front-end?"
+              />
+              <Carousel
+                key={categoria.id}
+                ignoreFirstVideo
+                category={categoria}
+              />
+            </>
+          );
+        }
 
-      <Carousel
-        ignoreFirstVideo
-        category={dadosIniciais.categorias[1]}
-      />
-
-      <Carousel
-        ignoreFirstVideo
-        category={dadosIniciais.categorias[2]}
-      />
-
+        return (
+          <Carousel
+            key={categoria.id}
+            ignoreFirstVideo
+            category={categoria}
+          />
+        );
+      })}
     </PageDefault>
   );
 }
