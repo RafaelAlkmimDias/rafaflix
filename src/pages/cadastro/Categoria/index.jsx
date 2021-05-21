@@ -19,16 +19,7 @@ function Categoria() {
 
   const [categorias, setCategorias] = useState([]);
 
-  function handlerSubmit(e) {
-    e.preventDefault();
-    setCategorias([
-      ...categorias,
-      values,
-    ]);
-    clearValues();
-  }
-
-  useEffect(() => {
+  function refreshCategories() {
     categoriasRepository.getAll().then((data) => {
       setCategorias([
         ...data,
@@ -37,6 +28,18 @@ function Categoria() {
       // eslint-disable-next-line no-console
       console.log(err);
     });
+  }
+  function handlerSubmit(e) {
+    e.preventDefault();
+    categoriasRepository.create(values).then(() => {
+      refreshCategories();
+    });
+
+    clearValues();
+  }
+
+  useEffect(() => {
+    refreshCategories();
   }, []);
 
   return (
