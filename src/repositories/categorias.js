@@ -1,34 +1,22 @@
 import config from '../config';
+import connections from './connections';
 
 const URL_CATEGORIAS = `${config.URL_BACKEND}categorias`;
 
 function getAll() {
-  return fetch(URL_CATEGORIAS).then(
-    async (result) => {
-      if (result.ok) {
-        const data = await result.json();
-        return data;
-      }
-
-      throw new Error('Ocorreu um erro');
-    },
-  );
+  return connections.get(URL_CATEGORIAS);
 }
 
 function getAllWithVideos() {
-  return fetch(`${URL_CATEGORIAS}?_embed=videos`).then(
-    async (result) => {
-      if (result.ok) {
-        const data = await result.json();
-        return data;
-      }
+  return connections.get(`${URL_CATEGORIAS}?_embed=videos`);
+}
 
-      throw new Error('ocorreu um erro');
-    },
-  );
+function create(objetoDaCategoria) {
+  return connections.post(URL_CATEGORIAS, objetoDaCategoria);
 }
 
 export default {
   getAllWithVideos,
   getAll,
+  create,
 };
